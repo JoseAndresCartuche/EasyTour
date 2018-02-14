@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_marcadores"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fccf08"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.desarrollador.easytour.AddMarcador">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="60sp">
+
+
+
+
+
+    <TextView
+        android:text="Titulo"
+        android:layout_width="wrap_content"
+        android:layout_margin="10sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/LblTitulo"
+        android:textColor="#080808"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+
+        android:id="@+id/txtTitulo"
+        android:background="#e1e0e0"/>
+
+    <TextView
+        android:text="Latitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/LblLatitud"
+        android:layout_margin="10sp"
+        android:textColor="#080808"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:id="@+id/txtLatitud"
+        android:background="#e1e0e0"
+        android:enabled="false"
+        android:inputType="text" />
+
+    <TextView
+        android:text="Longitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:id="@+id/LblLong"
+        android:textColor="#080808"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="12"
+        android:id="@+id/txtLongitud"
+        android:enabled="false"
+        android:background="#e1e0e0"/>
+
+    <TextView
+        android:text="Calles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:id="@+id/LblCalles"
+        android:textColor="#080808"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:background="#e1e0e0"
+        android:id="@+id/txtCalles"
+        android:inputType="text"/>
+
+    <TextView
+        android:text="Descripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:id="@+id/LblDescrip"
+        android:textColor="#080808"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="70sp"
+            android:inputType="textMultiLine"
+            android:ems="12"
+            android:id="@+id/txtDescrip"
+            android:background="#e1e0e0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="30sp">
+
+        <Button
+            android:text="Localizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLocalizar"
+            android:textColor="#080808" />
+
+        <Button
+            android:text="Guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnStopSave"
+            android:textColor="#080808"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

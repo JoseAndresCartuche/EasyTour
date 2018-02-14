@@ -1,0 +1,203 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fccf08"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10sp">
+
+        <ImageView
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            app:srcCompat="@drawable/lugar"
+            android:id="@+id/imageView7"
+            android:layout_marginLeft="40sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lugares Cercanos"
+            android:textColor="#1111ef"
+            android:textSize="25sp"
+            android:id="@+id/texto_principal" />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="250sp"
+            android:layout_height="32sp"
+            android:layout_marginLeft="50sp"
+            android:layout_marginRight="5sp"
+            android:enabled="true"
+            android:background="@android:color/white"
+            android:id="@+id/ubicaCoor" />
+
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:background="@drawable/bruju"
+            android:layout_marginTop="5sp"
+            android:id="@+id/localiza"
+            android:layout_weight="0.06" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="50sp"
+            app:srcCompat="@drawable/lugar"
+            android:id="@+id/imageView"
+            android:layout_weight="0.02"
+            android:layout_marginLeft="50sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lugar1"
+            android:editable="false"
+            android:contentDescription="t1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="250sp"
+            android:layout_height="2sp"
+            android:layout_marginLeft="35sp"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="50sp"
+            app:srcCompat="@drawable/lugar"
+            android:id="@+id/imageView2"
+            android:layout_marginLeft="50sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lugar2"
+            android:editable="false"
+            android:contentDescription="t2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="250sp"
+            android:layout_height="2sp"
+            android:layout_marginLeft="35sp"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="50sp"
+            app:srcCompat="@drawable/lugar"
+            android:id="@+id/imageView3"
+            android:layout_marginLeft="50sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lugar3"
+            android:editable="false"
+            android:contentDescription="t3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="250sp"
+            android:layout_height="2sp"
+            android:layout_marginLeft="35sp"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="50sp"
+            app:srcCompat="@drawable/lugar"
+            android:id="@+id/imageView4"
+            android:layout_marginLeft="50sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lugar4"
+            android:editable="false"
+            android:contentDescription="t4" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="250sp"
+            android:layout_height="2sp"
+            android:layout_marginLeft="35sp"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+
+</LinearLayout>

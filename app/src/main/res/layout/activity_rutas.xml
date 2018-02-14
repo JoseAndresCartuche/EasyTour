@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fccf08"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            app:srcCompat="@drawable/rut"
+            android:id="@+id/imageView7"
+            android:layout_marginLeft="90dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rutas"
+            android:textColor="#1111ef"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/texto_principal"
+            android:paddingLeft="10dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ruta"
+            android:id="@+id/imageView"
+            android:layout_weight="0.02"
+            android:layout_marginLeft="50dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:contentDescription="t1" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="250dp"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ruta"
+            android:id="@+id/imageView2"
+            android:layout_marginLeft="50dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:contentDescription="t2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="250dp"
+            android:layout_height="2dp"
+            android:layout_marginLeft="35dp"
+            android:background="@android:color/white"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

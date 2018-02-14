@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ruta"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:background="#fccf08"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.desarrollador.easytour.AddRuta">
+
+    <TextView
+        android:text="Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TxtTitulo"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/txtTitulo"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TableLayout
+        android:id="@+id/coordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtLatitud"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Latitud"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="0.0" />
+
+            <TextView
+                android:id="@+id/txtLongitud"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Longitud"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="0.0" />
+        </TableRow>
+
+        <TableRow
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/Lbl_latitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Latitud"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/Lbl_longitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Longitud"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_activity_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_question" />
+
+        </TableRow>
+
+        <TextView
+            android:id="@+id/tv_activity_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="Reconocimiento de Actividad"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    </TableLayout>
+
+    <TextView
+        android:text="Recorrido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coordinates"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:id="@+id/LblRecorrido"
+        android:textColor="@android:color/black"
+        android:editable="false"
+        android:clickable="false" />
+
+    <Button
+        android:text="Parar y Guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStopSave"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LblRecorrido"
+        android:layout_alignParentStart="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/txtCoordenadas"
+            android:clickable="false"
+            android:editable="false"
+            android:enabled="false"
+            android:textColorLink="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@+id/coordinates"
+            android:layout_above="@+id/btnStopSave"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:height="230dp" />
+    </ScrollView>
+
+</RelativeLayout>
