@@ -10,6 +10,7 @@ import com.desarrollador.sqlite.Tablas_SQL.Fotos;
 import com.desarrollador.sqlite.Tablas_SQL.Rutas;
 import com.desarrollador.sqlite.Tablas_SQL.Coordenadas;
 import com.desarrollador.sqlite.Tablas_SQL.Planos;
+import com.desarrollador.sqlite.Tablas_SQL.ColumnCategoria;
 
 
 /**
@@ -17,9 +18,9 @@ import com.desarrollador.sqlite.Tablas_SQL.Planos;
  */
 public class BaseDatosAyuda extends SQLiteOpenHelper {
 
-    private static final String NOMBRE_BASE_DATOS = "EasyTour.db";
+    public static final String NOMBRE_BASE_DATOS = "YouMap.db";
 
-    private static final int VERSION_ACTUAL = 1;
+    public static final int VERSION_ACTUAL = 4;
     private BaseDatosAyuda ayuda;
     private SQLiteDatabase sqLiteDatabase;
 
@@ -30,7 +31,8 @@ public class BaseDatosAyuda extends SQLiteOpenHelper {
         String FOTOS = "Fotos";
         String MARCADOR = "Marcadores";
         String RUTA = "Rutas";
-        String COORDENADAS = "Coordenas";
+        String COORDENADAS = "Coordenadas";
+        String CATEGORIAS = "Categorias";
     }
 
     interface Referencias {
@@ -39,6 +41,9 @@ public class BaseDatosAyuda extends SQLiteOpenHelper {
 
         String TITULO_RUTA = String.format("REFERENCES %s(%s)",
                 Tablas.RUTA, Rutas.TITULO_RUTA);
+
+        String ID_CATEGORIA = String.format("REFERENCES %s(%s)",
+                Tablas.CATEGORIAS, ColumnCategoria._ID);
     }
 
     public BaseDatosAyuda(Context contexto) {
@@ -46,20 +51,20 @@ public class BaseDatosAyuda extends SQLiteOpenHelper {
         this.contexto = contexto;
     }
 
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        //ayuda = new BaseDatosAyuda(contexto);
+        //sqLiteDatabase = ayuda.getWritableDatabase();
 
-    public void onOpen() {
-        ayuda = new BaseDatosAyuda(contexto);
-        sqLiteDatabase=ayuda.getWritableDatabase();
-/*
-        super.onOpen(sqLiteDatabase);
-        if (!sqLiteDatabase.isReadOnly()) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                sqLiteDatabase.setForeignKeyConstraintsEnabled(true);
+                db.setForeignKeyConstraintsEnabled(true);
             } else {
-                sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON");
+                db.execSQL("PRAGMA foreign_keys=\"ON\"");
             }
         }
-*/
+        sqLiteDatabase = db;
     }
 
     public void onClose(SQLiteDatabase db){
@@ -70,24 +75,66 @@ public class BaseDatosAyuda extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(String.format("CREATE TABLE IF NOT EXISTS %s (" +
-                "%s TEXT PRIMARY KEY," +
-                "%s NUMERIC UNIQUE NOT NULL," +
-                "%s NUMERIC UNIQUE NOT NULL," +
-                "%s TEXT NOT NULL," +
-                "%s TEXT NOT NULL)",
-                Tablas.MARCADOR, Marcadores.TITULO, Marcadores.LATITUD, Marcadores.LONGITUD, Marcadores.CALLES, Marcadores.DESCRIPCION));
+                        "%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "%s TEXT NOT NULL, " +
+                        "%s TEXT NOT NULL " +
+                        ")",
+                Tablas.CATEGORIAS, ColumnCategoria._ID, ColumnCategoria.NAME,
+                ColumnCategoria.ICON));
+
+        db.execSQL("INSERT INTO "+Tablas.CATEGORIAS +"("+ColumnCategoria.NAME+","+ColumnCategoria.ICON+
+                ") VALUES ('Restaurantes','URL ICONO')");
+
+        db.execSQL("INSERT INTO "+Tablas.CATEGORIAS +"("+ColumnCategoria.NAME+","+ColumnCategoria.ICON+
+                ") VALUES ('Plazas','URL ICONO')");
+
+        db.execSQL("INSERT INTO "+Tablas.CATEGORIAS +"("+ColumnCategoria.NAME+","+ColumnCategoria.ICON+
+                ") VALUES ('Parques','URL ICONO')");
+
+        db.execSQL("INSERT INTO "+Tablas.CATEGORIAS +"("+ColumnCategoria.NAME+","+ColumnCategoria.ICON+
+                ") VALUES ('Hoteles','URL ICONO')");
+
+        db.execSQL("INSERT INTO "+Tablas.CATEGORIAS +"("+ColumnCategoria.NAME+","+ColumnCategoria.ICON+
+                ") VALUES ('Playas','URL ICONO')");
+
+        db.execSQL(String.format("CREATE TABLE IF NOT EXISTS %s (" +
+                        "%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "%s TEXT NOT NULL," +
+                        "%s NUMERIC NOT NULL," +
+                        "%s NUMERIC NOT NULL," +
+                        "%s TEXT NOT NULL," +
+                        "%s TEXT NOT NULL," +
+                        "%s TEXT NULL," +
+                        "%s INTEGER NOT NULL," +
+                        "FOREIGN KEY (id_categoria) %s" +
+                        ")",
+                Tablas.MARCADOR, Marcadores._ID, Marcadores.TITULO, Marcadores.LATITUD, Marcadores.LONGITUD,
+                Marcadores.CALLES, Marcadores.DESCRIPCION, Marcadores.IMAGEN, Marcadores.ID_CATEGORIA, Referencias.ID_CATEGORIA));
 
         db.execSQL("INSERT INTO "+Tablas.MARCADOR +"("+Marcadores.TITULO+","+Marcadores.LATITUD
-                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+") VALUES" +
-                "('Mitad del Mundo', -0.002228, -78.455847,'Manuel Cordova Galarza', 'Descripcion texto full')");
+                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+","+Marcadores.IMAGEN+","
+                +Marcadores.ID_CATEGORIA+") VALUES" +
+                "('Mitad del Mundo', -0.002228, -78.455847,'Manuel Cordova Galarza', 'Descripcion texto full', null,2)");
 
         db.execSQL("INSERT INTO "+Tablas.MARCADOR +"("+Marcadores.TITULO+","+Marcadores.LATITUD
-                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+") VALUES" +
-                "('Monumento a Simón Bolivar', -3.994906, -79.204753, '18 de Noviembre', 'Descripcion texto full')");
+                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+","+Marcadores.IMAGEN+","
+                +Marcadores.ID_CATEGORIA+") VALUES" +
+                "('Monumento a Simón Bolivar', -3.994906, -79.204753, '18 de Noviembre', 'Descripcion texto full', null, 2)");
 
         db.execSQL("INSERT INTO "+Tablas.MARCADOR +"("+Marcadores.TITULO+","+Marcadores.LATITUD
-                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+") VALUES" +
-                "('Monumento a Bernardo Valdivieso', -3.996690, -79.201663, '18 de Noviembre', 'Descripcion texto full')");
+                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+","+Marcadores.IMAGEN+","
+                +Marcadores.ID_CATEGORIA+") VALUES" +
+                "('Monumento a Bernardo Valdivieso', -3.996690, -79.201663, '18 de Noviembre', 'Descripcion texto full', null, 2)");
+
+        db.execSQL("INSERT INTO "+Tablas.MARCADOR +"("+Marcadores.TITULO+","+Marcadores.LATITUD
+                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+","+Marcadores.IMAGEN+","
+                +Marcadores.ID_CATEGORIA+") VALUES" +
+                "('Hotel Libertador', -3.995429, -79.202561, 'Colón', 'Descripcion texto full', null, 4)");
+
+        db.execSQL("INSERT INTO "+Tablas.MARCADOR +"("+Marcadores.TITULO+","+Marcadores.LATITUD
+                +","+Marcadores.LONGITUD+","+Marcadores.CALLES+","+Marcadores.DESCRIPCION+","+Marcadores.IMAGEN+","
+                +Marcadores.ID_CATEGORIA+") VALUES" +
+                "('Parrilladas el Carbonero', -4.000313, -79.197707, '24 de Mayo', 'Descripcion texto full', null, 1)");
 
         db.execSQL(String.format("CREATE TABLE IF NOT EXISTS %s (" +
                 "%s TEXT NOT NULL," +
@@ -135,7 +182,6 @@ public class BaseDatosAyuda extends SQLiteOpenHelper {
 //                Tablas.PLANOS, Planos.TITULO_MARKET, Planos.TITULO_RUTA, Referencias.TITULO_MARKET, Referencias.TITULO_RUTA));
                 Tablas.PLANOS, Planos.TITULO_MARKET, Planos.TITULO_RUTA));
 
-
     }
 
     @Override
@@ -146,6 +192,7 @@ public class BaseDatosAyuda extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.RUTA);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.COORDENADAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.PLANOS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.CATEGORIAS);
         onCreate(db);
     }
 

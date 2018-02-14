@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    tools:context="com.desarrollador.easytour.DetalleMarcadores.MarkerDetailFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_TitleMarker"
+        android:textColor="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_title_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="Title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_Location"
+        android:textColor="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_location_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="0.000000 0.0000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_Streets"
+        android:textColor="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_streets_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="Av. Unknown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_Description"
+        android:textColor="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_description_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="@string/large_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_Category"
+        android:textColor="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_category_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="category" />
+
+
+</LinearLayout>

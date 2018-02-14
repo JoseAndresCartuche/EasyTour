@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.support.annotation.Nullable;
 
 import com.desarrollador.modelo.AgregarRuta;
+import com.desarrollador.modelo.Categoria;
 import com.desarrollador.modelo.Coordenada;
 import com.desarrollador.modelo.Foto;
 import com.desarrollador.modelo.Market;
@@ -20,8 +21,10 @@ import com.desarrollador.sqlite.Tablas_SQL.Fotos;
 import com.desarrollador.sqlite.Tablas_SQL.Rutas;
 import com.desarrollador.sqlite.Tablas_SQL.Coordenadas;
 import com.desarrollador.sqlite.Tablas_SQL.Planos;
+import com.desarrollador.sqlite.Tablas_SQL.ColumnCategoria;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -125,17 +128,27 @@ public final class OperacionesBaseDatos {
     // [/OPERACIONES_CABECERA_PEDIDO]
 
     // [OPERACIONES_MARCADORES]
-    public Cursor obtenerMarkets() {
-        String[] columns = new String[]{Tablas_SQL.ColumnaMarket.TITULO,
-                Tablas_SQL.ColumnaMarket.LATITUD,
-                Tablas_SQL.ColumnaMarket.LONGITUD,
-                Tablas_SQL.ColumnaMarket.CALLES,
-                Tablas_SQL.ColumnaMarket.DESCRIPCION};
-        Cursor cursor = sqLiteDatabase.query(Tablas.MARCADOR,columns,null,null,null,null,null);
-        if(cursor!=null){
-            cursor.moveToFirst();
+    public Market getMarketById(int idMarket) {
+        SQLiteDatabase db = bd_helper.getReadableDatabase();
+        Market market = null;
+        String selection = String.format("%s=?", Tablas_SQL.ColumnaMarket._ID);
+        String[] selectionArgs = {String.valueOf(idMarket)};
+
+        Cursor cursor = db.query(Tablas.MARCADOR, null, selection, selectionArgs, null, null, null);
+        if (cursor != null){
+            if (cursor.moveToFirst()) {
+                String titulo = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.TITULO));
+                double latitud = cursor.getDouble(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.LATITUD));
+                double longitud = cursor.getDouble(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.LONGITUD));
+                String calles = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.CALLES));
+                String descripcion = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.DESCRIPCION));
+                String imagePath = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.IMAGEN));
+                Categoria cat = getCategoriaById(cursor.getInt(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.ID_CATEGORIA)));
+                market = new Market(titulo, latitud, longitud, calles, descripcion, imagePath, cat);
+            }
         }
-        return cursor;
+        cursor.close();
+        return market;
 /*
         SQLiteDatabase db = bd_helper.getReadableDatabase();
 
@@ -161,24 +174,44 @@ public final class OperacionesBaseDatos {
                 Tablas_SQL.ColumnaMarket.LATITUD,
                 Tablas_SQL.ColumnaMarket.LONGITUD,
                 Tablas_SQL.ColumnaMarket.CALLES,
-                Tablas_SQL.ColumnaMarket.DESCRIPCION};
-        Cursor cursor = sqLiteDatabase.query(Tablas.MARCADOR,columns,null,null,null,null,null);
+                Tablas_SQL.ColumnaMarket.DESCRIPCION,
+                Tablas_SQL.ColumnaMarket.ID_CATEGORIA};
+        Cursor cursor = sqLiteDatabase.query(Tablas.MARCADOR,columns,null,null,
+                null,null,null);
         cursor.moveToFirst();
         do {
-            listMarkets.add(new Market(cursor.getString(0), cursor.getDouble(1), cursor.getDouble(2), cursor.getString(3), cursor.getString(4)));
+            listMarkets.add(new Market(cursor.getString(0), cursor.getDouble(1),
+                    cursor.getDouble(2), cursor.getString(3),
+                    cursor.getString(4), cursor.getString(5), getCategoriaById(cursor.getInt(6))));
         }while(cursor.moveToNext());
         return listMarkets;
     }
 
-    public String insertarMarket(Market market) {
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(Tablas_SQL.ColumnaMarket.TITULO,market.titulo);
-        contentValues.put(Tablas_SQL.ColumnaMarket.LATITUD,market.latitud);
-        contentValues.put(Tablas_SQL.ColumnaMarket.LONGITUD,market.longitud);
-        contentValues.put(Tablas_SQL.ColumnaMarket.CALLES,market.calles);
-        contentValues.put(Tablas_SQL.ColumnaMarket.DESCRIPCION,market.descripcion);
+    public Cursor getAllMarkets() {
+        Cursor cursor = bd_helper.getReadableDatabase().query(Tablas.MARCADOR, null, null, null,
+                null, null, null);
+        return cursor;
+    }
 
-        return sqLiteDatabase.insert(Tablas.MARCADOR,null,contentValues)> 0 ? market.titulo : null;
+    public Cursor getMarkersByCategory(int idCategory) {
+        String selection = String.format("%s=?", Tablas_SQL.ColumnaMarket.ID_CATEGORIA);
+        String[] selectionArgs = {String.valueOf(idCategory)};
+        Cursor cursor = bd_helper.getReadableDatabase().query(Tablas.MARCADOR, null, selection, selectionArgs,
+                null, null, null);
+        return cursor;
+    }
+
+    public long insertarMarket(Market market) {
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(Tablas_SQL.ColumnaMarket.TITULO,market.getTitulo());
+        contentValues.put(Tablas_SQL.ColumnaMarket.LATITUD,market.getLatitud());
+        contentValues.put(Tablas_SQL.ColumnaMarket.LONGITUD,market.getLongitud());
+        contentValues.put(Tablas_SQL.ColumnaMarket.CALLES,market.getCalles());
+        contentValues.put(Tablas_SQL.ColumnaMarket.DESCRIPCION,market.getDescripcion());
+        contentValues.put(Tablas_SQL.ColumnaMarket.IMAGEN, market.getImagePath());
+        contentValues.put(Tablas_SQL.ColumnaMarket.ID_CATEGORIA,market.getCategoria().getId());
+
+        return sqLiteDatabase.insert(Tablas.MARCADOR,null,contentValues);
 /*
         SQLiteDatabase db = bd_helper.getWritableDatabase();
 
@@ -200,14 +233,14 @@ public final class OperacionesBaseDatos {
         SQLiteDatabase db = bd_helper.getWritableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put(Marcadores.TITULO, market.titulo);
-        valores.put(Marcadores.LATITUD, market.latitud);
-        valores.put(Marcadores.LONGITUD, market.longitud);
-        valores.put(Marcadores.CALLES, market.calles);
-        valores.put(Marcadores.DESCRIPCION, market.descripcion);
+        valores.put(Marcadores.TITULO, market.getTitulo());
+        valores.put(Marcadores.LATITUD, market.getLatitud());
+        valores.put(Marcadores.LONGITUD, market.getLongitud());
+        valores.put(Marcadores.CALLES, market.getCalles());
+        valores.put(Marcadores.DESCRIPCION, market.getDescripcion());
 
         String whereClause = String.format("%s=?", Marcadores.TITULO);
-        String[] whereArgs = {market.titulo};
+        String[] whereArgs = {market.getTitulo()};
 
         int resultado = db.update(Tablas.MARCADOR, valores, whereClause, whereArgs);
 
@@ -442,6 +475,52 @@ public final class OperacionesBaseDatos {
         return resultado > 0;
     }
     // [/OPERACIONES_COORDENADAS]
+
+
+    public ArrayList<Categoria> getAllCategory() {
+        SQLiteDatabase db = bd_helper.getReadableDatabase();
+        ArrayList<Categoria> lista = new ArrayList<>();
+//        String[] columns = new String[]{
+//                ColumnCategoria._ID,
+//                ColumnCategoria.NAME};
+
+        Cursor cursor = db.query(Tablas.CATEGORIAS, null, null, null, null, null, null);
+
+        if(cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                Categoria ct = new Categoria(cursor.getInt(cursor.getColumnIndex(ColumnCategoria._ID)),
+                        cursor.getString(cursor.getColumnIndex(ColumnCategoria.NAME)),
+                        cursor.getString(cursor.getColumnIndex(ColumnCategoria.ICON)));
+                lista.add(ct);
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+
+    public Categoria getCategoriaById(int idCategoria) {
+        SQLiteDatabase db = bd_helper.getReadableDatabase();
+        String selection = String.format("%s=?", ColumnCategoria._ID);
+        String[] selectionArgs = {String.valueOf(idCategoria)};
+        Categoria categoria = null;
+
+        Cursor cursor = db.query(Tablas.CATEGORIAS, null, selection, selectionArgs, null, null, null);
+
+        if(cursor != null && cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                categoria = new Categoria(cursor.getInt(cursor.getColumnIndex(ColumnCategoria._ID)),
+                        cursor.getString(cursor.getColumnIndex(ColumnCategoria.NAME)),
+                        cursor.getString(cursor.getColumnIndex(ColumnCategoria.ICON)));
+            }
+        }
+
+        cursor.close();
+        return categoria;
+    }
 
 
     public SQLiteDatabase getDb() {

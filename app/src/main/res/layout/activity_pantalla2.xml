@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fccf08"
+    android:background="@drawable/degradado"
     android:orientation="vertical">
 
     <LinearLayout
@@ -15,32 +15,42 @@
         <ViewFlipper
             android:id="@+id/ViewFlipper1"
             android:layout_width="match_parent"
-            android:layout_height="160sp">
-
+            android:layout_height="210sp">
 
             <ImageView
                 android:id="@+id/ImageView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/loja1"/>
-
-            <ImageView
-                android:id="@+id/ImageView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/loja2"/>
+                android:src="@mipmap/logo" />
 
             <ImageView
                 android:id="@+id/ImageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/loja3"/>
+                android:background="#000000"
+                android:src="@mipmap/loja3" />
 
             <ImageView
                 android:id="@+id/ImageView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/loja4"/>
+                android:background="#000000"
+                android:src="@mipmap/loja4" />
+
+            <ImageView
+                android:id="@+id/ImageView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/loja5" />
+
+            <ImageView
+                android:id="@+id/ImageView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:src="@mipmap/loja6" />
 
         </ViewFlipper>
 
@@ -65,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnAddMarket"
-                android:background="@drawable/agregar_marcador"
+                android:background="@drawable/icono_1"
                 />
 
 
@@ -73,20 +83,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/planos"
-                android:background="@drawable/btn_planos" />
+                android:background="@drawable/icono_2" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/lugares_cercanos"
-                android:background="@drawable/btn_lugares_cercanos" />
+                android:background="@drawable/icono_3" />
 
 
 
         </LinearLayout>
 
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -109,7 +119,7 @@
                 android:id="@+id/rutas"
                 android:background="@drawable/btn_rutas" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
     <LinearLayout
@@ -118,23 +128,16 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
 
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnLista"
-            android:textColor="#42A5F5"
+            android:textColor="#000000"
             android:textSize="15sp"
-            android:background="#fccf08"
-            android:text="Marcadores"
+            android:text=" Filtro de Busqueda  "
             android:drawableLeft="@drawable/listamarca" />
 
 
     </LinearLayout>
-
-
-
-
-
 </LinearLayout>
 

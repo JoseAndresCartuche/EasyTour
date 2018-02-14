@@ -9,6 +9,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import com.desarrollador.easytour.listaMarcadores.ListMarkActivity;
+
 public class Pantalla2 extends AppCompatActivity {
 
     Button planos;
@@ -40,24 +42,14 @@ public class Pantalla2 extends AppCompatActivity {
         viewFlipper.startFlipping();
 
         AgregarMarket = (Button) findViewById(R.id.btnAddMarket);
-        AgregarRuta = (Button) findViewById(R.id.btnAddRute);
         planos = (Button) findViewById(R.id.planos);
-        lugares = (Button) findViewById(R.id.lugares);
         lugares_cercanos = (Button) findViewById(R.id.lugares_cercanos);
-        rutas = (Button) findViewById(R.id.rutas);
         ListaMarcadores = (Button) findViewById(R.id.btnLista);
 
         AgregarMarket.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View v){
                 AbrirMarket();
-            }
-        });
-
-        AgregarRuta.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                AbrirRuta();
             }
         });
 
@@ -68,25 +60,10 @@ public class Pantalla2 extends AppCompatActivity {
             }
         });
 
-
-        lugares.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                ejecutar_lugares();
-            }
-        });
-
         lugares_cercanos.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View v){
                 ejecutar_lugares_cercanos();
-            }
-        });
-
-        rutas.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                ejecutar_rutas();
             }
         });
 
@@ -103,33 +80,18 @@ public class Pantalla2 extends AppCompatActivity {
         startActivity(i1);
     }
     
-    public void AbrirRuta(){
-        Intent i2 = new Intent(this,AddRuta.class);
-        startActivity(i2);
-    }
-    
     public void AbrirMapa(){
         Intent i3 = new Intent(this,MapaEncontrado.class);
         startActivity(i3);
-    }
-    
-    public void ejecutar_lugares(){
-        Intent i4 = new Intent(this,Lugares.class);
-        startActivity(i4);
     }
     
     public void ejecutar_lugares_cercanos(){
         Intent i5 = new Intent(this,Lugares_Cercanos.class);
         startActivity(i5);
     }
-    
-    public void ejecutar_rutas(){
-        Intent i6 = new Intent(this,Rutas.class);
-        startActivity(i6);
-    }
 
     public void ejecutar_Lista(){
-        Intent i7 = new Intent(this,ListaMarcadores.class);
+        Intent i7 = new Intent(this, ListMarkActivity.class);
         startActivity(i7);
     }
 }

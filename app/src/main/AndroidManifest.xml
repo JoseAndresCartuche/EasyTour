@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- GPS -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <!-- >Reconocimiento de la actividad realizada por el usuario (s va caminando, corriendo, auto, bicle)< -->
@@ -18,17 +17,31 @@
      android:targetSdkVersion="19"
      /
     -->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Principal" />
+        <activity
+            android:name=".Principal"
+            android:theme="@style/AppTheme.DarkActionBar" />
         <activity
             android:name=".Splash"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
@@ -40,10 +53,15 @@
         </activity>
         <!-- Aqui el mapa MALL -->
         <activity android:name=".Lugares" />
-        <activity android:name=".Pantalla2" />
+        <activity
+            android:name=".Pantalla2"
+            android:theme="@style/AppTheme.DarkActionBar" />
         <activity android:name=".Lugares_Cercanos" />
         <activity android:name=".Rutas" />
-        <activity android:name=".ListaMarcadores" />
+        <activity
+            android:name=".listaMarcadores.ListMarkActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.DarkActionBar" />
 
         <!-- ventana de inicio (Datos para el GPS) -->
         <!-- Ventana para la AgregarMARCADOR -->
@@ -75,6 +93,10 @@
             android:name=".DetectedActivitiesIntentService"
             android:exported="false" />
 
+        <activity
+            android:name=".DetalleMarcadores.MarkerDetailActivity"
+            android:label="@string/title_activity_marker_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

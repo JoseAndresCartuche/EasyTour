@@ -133,13 +133,13 @@ public class MapaEncontrado extends FragmentActivity implements OnMapReadyCallba
         //Coordenadas del AddMarcador
         if(listMarkets.isEmpty()==false){
             for(Market elemento: listMarkets){
-                LatLng localizado = new LatLng(elemento.latitud, elemento.longitud);
+                LatLng localizado = new LatLng(elemento.getLatitud(), elemento.getLongitud());
                 Log.d("Marcadores", localizado.latitude+ ", "+ localizado.longitude);
                 MarkerOptions marcador = new MarkerOptions()
-                        .title(elemento.titulo)
+                        .title(elemento.getTitulo())
                         .position(localizado)
-                        .snippet("Calle: " + elemento.calles
-                                +"Descripción: " + elemento.descripcion);
+                        .snippet("Calle: " + elemento.getCalles()
+                                +"Descripción: " + elemento.getDescripcion());
                 mMap.addMarker(marcador);
             CameraUpdate mCamara = CameraUpdateFactory.newLatLng(localizado);
             mMap.moveCamera(mCamara);

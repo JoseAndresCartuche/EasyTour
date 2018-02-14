@@ -41,6 +41,7 @@ import org.json.JSONObject;
 public class Lugares_Cercanos extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
+
     private static final String LOGTAG = "android-localizacion";
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
 

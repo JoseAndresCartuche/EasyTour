@@ -8,20 +8,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.florcita.easytour.Splash"
-    android:background="#fccf08">
-
-
-
+    tools:context="com.desarrollador.easytour.Splash"
+    android:background="#2a2a2a">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="130dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:src="@drawable/logo_easy_tour"
+        android:src="@drawable/youmap3"
         android:foregroundGravity="center_vertical"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <!-- android:scaleType="fitXY" -->
 
 </RelativeLayout>
