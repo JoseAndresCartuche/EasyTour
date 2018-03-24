@@ -137,6 +137,7 @@ public final class OperacionesBaseDatos {
         Cursor cursor = db.query(Tablas.MARCADOR, null, selection, selectionArgs, null, null, null);
         if (cursor != null){
             if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket._ID));
                 String titulo = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.TITULO));
                 double latitud = cursor.getDouble(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.LATITUD));
                 double longitud = cursor.getDouble(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.LONGITUD));
@@ -144,7 +145,7 @@ public final class OperacionesBaseDatos {
                 String descripcion = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.DESCRIPCION));
                 String imagePath = cursor.getString(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.IMAGEN));
                 Categoria cat = getCategoriaById(cursor.getInt(cursor.getColumnIndex(Tablas_SQL.ColumnaMarket.ID_CATEGORIA)));
-                market = new Market(titulo, latitud, longitud, calles, descripcion, imagePath, cat);
+                market = new Market(id, titulo, latitud, longitud, calles, descripcion, imagePath, cat);
             }
         }
         cursor.close();
@@ -169,20 +170,19 @@ public final class OperacionesBaseDatos {
 
     public ArrayList<Market> ListaMarkets() {
         ArrayList<Market> listMarkets= new ArrayList<>();
-        String[] columns = new String[]{
-                Tablas_SQL.ColumnaMarket.TITULO,
-                Tablas_SQL.ColumnaMarket.LATITUD,
-                Tablas_SQL.ColumnaMarket.LONGITUD,
-                Tablas_SQL.ColumnaMarket.CALLES,
-                Tablas_SQL.ColumnaMarket.DESCRIPCION,
-                Tablas_SQL.ColumnaMarket.ID_CATEGORIA};
-        Cursor cursor = sqLiteDatabase.query(Tablas.MARCADOR,columns,null,null,
-                null,null,null);
+//        String[] columns = new String[]{
+//                Tablas_SQL.ColumnaMarket.TITULO,
+//                Tablas_SQL.ColumnaMarket.LATITUD,
+//                Tablas_SQL.ColumnaMarket.LONGITUD,
+//                Tablas_SQL.ColumnaMarket.CALLES,
+//                Tablas_SQL.ColumnaMarket.DESCRIPCION,
+//                Tablas_SQL.ColumnaMarket.ID_CATEGORIA};
+        Cursor cursor = sqLiteDatabase.query(Tablas.MARCADOR, null, null, null, null, null, null);
         cursor.moveToFirst();
         do {
-            listMarkets.add(new Market(cursor.getString(0), cursor.getDouble(1),
-                    cursor.getDouble(2), cursor.getString(3),
-                    cursor.getString(4), cursor.getString(5), getCategoriaById(cursor.getInt(6))));
+            listMarkets.add(new Market(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2),
+                    cursor.getDouble(3), cursor.getString(4),
+                    cursor.getString(5), cursor.getString(6), getCategoriaById(cursor.getInt(7))));
         }while(cursor.moveToNext());
         return listMarkets;
     }

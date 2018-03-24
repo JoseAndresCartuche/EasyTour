@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,10 +20,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.desarrollador.easytour.BuildConfig;
 import com.desarrollador.easytour.R;
 import com.desarrollador.modelo.Market;
 import com.desarrollador.sqlite.OperacionesBaseDatos;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 /**
  * Vista para el detalle del marcador
@@ -127,8 +132,9 @@ public class MarkerDetailFragment extends Fragment {
         mCollapsingView.setTitle(market.getTitulo());
         //Log.d("CDActivity", contact.getName());
         if(market.getImagePath() != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(market.getImagePath());
-            mPhotoView.setImageBitmap(bitmap);
+            File image = new File(market.getImagePath());
+            Uri uri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", image);
+            Picasso.get().load(uri).into(mPhotoView);
         }
         mTitleView.setText(market.getTitulo());
         mStreetView.setText(market.getCalles());

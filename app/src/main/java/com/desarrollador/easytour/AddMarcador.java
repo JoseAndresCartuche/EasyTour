@@ -312,7 +312,6 @@ public class AddMarcador extends AppCompatActivity
                     mImageView.setImageBitmap(bitmap);
                     //mTextView.setVisibility(View.GONE);
                     break;
-
             }
         }
 
